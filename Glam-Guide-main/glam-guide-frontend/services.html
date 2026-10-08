@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLAM GUIDE - Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f1ebeb;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #0f0e0e;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #ccc;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #f7f4f4;
+            font-weight: bold;
+            font-size: 1rem;
+            display: block; 
+            padding: 10px 15px; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00; 
+            background-color: rgba(255, 204, 0, 0.2); 
+            border-radius: 5px; 
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin: 40px auto;
+            max-width: 900px;
+            justify-items: center;
+        }
+        @media (max-width: 900px) {
+            .services {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+        }
+        .service-block {
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            min-height: 220px;
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 36px 28px 32px 28px;
+            position: relative;
+            border: 1.5px solid #2d2f36;
+        }
+        .service-block:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.18);
+            border-color: #5e72eb;
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 18px;
+            color: #5e72eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .service-block h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0 0 0.5em 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .service-desc {
+            color: #e0e0e0;
+            font-size: 1.05rem;
+            margin: 0;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .service-description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0; 
+            text-align: center;
+        }
+
+        .service-block:hover img,
+        .service-block:hover h2 {
+            opacity: 0; 
+        }
+
+        .service-block:hover .service-description {
+            opacity: 1; 
+        }
+
+        .click-here {
+            margin-top: auto; 
+            font-weight: bold; 
+            color: #0e7bf0; 
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GLAM GUIDE</h1>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="about.html">About us</a>
+        </nav>
+    </header>
+
+    <section class="services">
+        <a href="outfitrecommendtion.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">👗</div>
+            <h2>Outfit Generator</h2>
+            <p class="service-desc">Get personalized outfit suggestions based on your body type, style preferences, and occasion.</p>
+        </div></a>
+        <a href="game.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">🎮</div>
+            <h2>Personalized Recommendations</h2>
+            <p class="service-desc">Bored with tedious fashion stuff? Let us have some fun with this interactive game.</p>
+        </div></a>
+        <a href="wardrobemanagement.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">👚</div>
+            <h2>Wardrobe Management</h2>
+            <p class="service-desc">Easily save your favorite outfits and manage your virtual wardrobe with our intuitive interface.</p>
+        </div></a>
+        <a href="shoppingintegration.html" style="text-decoration:none;color:inherit;"><div class="service-block">
+            <div class="service-icon">🛒</div>
+            <h2>Shopping Integration</h2>
+            <p class="service-desc">Seamlessly purchase recommended items through links to your favorite stores right from our website.</p>
+        </div></a>
+    </section>
+
+    <footer>
+        <p>© 2024 GLAM GUIDE - All rights reserved</p>
+    </footer>
+    <script src="api.js"></script>
+    <script src="services.js" defer></script>
+</body>
+</html>

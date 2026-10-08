@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLAM GUIDE</title>
+    <!-- Import Google Fonts for a stylish font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #625f5f;
+        }
+
+        header {
+            background-color: #111010;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+        }
+
+        header h1 {
+            font-size: 4.5rem; /* Increased font size for the "Welcome to GLAM GUIDE" */
+            color: #ffffffcd;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fbf8f8;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #fcf8f8;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffcc00;
+            background-color: rgba(255, 204, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px;
+            background-color: #f5f5f5;
+            gap: 20px;
+        }
+
+        /* Animation for the Hero Text */
+        .animated-text {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInSlideIn 1.2s forwards; /* Slow down the animation */
+            font-size: 1.5rem; /* Default font size for the rest of the text */
+            color: #333;
+            line-height: 1.5;
+        }
+
+        @keyframes fadeInSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animated-text:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .animated-text:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .animated-text:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .animated-text:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        .animated-text:nth-child(5) {
+            animation-delay: 2s;
+        }
+
+        .animated-text:nth-child(6) {
+            animation-delay: 2.5s;
+        }
+
+        .animated-text:nth-child(7) {
+            animation-delay: 3s;
+        }
+
+        .animated-text:nth-child(8) {
+            animation-delay: 3.5s;
+        }
+
+        /* Custom hop animation for 'LetΓÇÖs get stylish!' */
+        .hop-text {
+            opacity: 0;
+            animation: hopIn 1s forwards;
+            font-size: 2.2rem; /* Larger font size for more impact */
+            font-weight: bold;
+            color: #060505; /* Removed the yellow color, changed to white */
+            transform: translateY(50px);
+        }
+
+        @keyframes hopIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(1);
+            }
+            40% {
+                opacity: 1;
+                transform: translateY(-30px) scale(1.2); /* Bigger jump and scaling */
+            }
+            70% {
+                transform: translateY(10px) scale(1.1); /* Slight bounce back */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1); /* Return to normal position */
+            }
+        }
+
+        /* Flexbox Layout to Position Text on the Right and Image on the Left */
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 2;
+            padding: 20px;
+            color: #111;
+        }
+
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GLAM GUIDE</h1>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="about.html">About us</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Hero Image Section on the Left -->
+            <div class="hero-image-container">
+                <img src="Picture1.png" alt="Fashion Image">
+            </div>
+
+            <!-- Hero Text Section on the Right -->
+            <div class="hero-text">
+                <h1 class="animated-text" style="font-size: 4rem;">Welcome to GLAM GUIDE</h1>
+                <p class="animated-text">
+                    Your ultimate fashion companion. Powered by the latest trends and advanced technology, we are here to elevate your wardrobe game.
+                </p>
+                <p class="animated-text">Need the perfect outfit for a big event?</p>
+                <p class="animated-text">Want to refresh your daily look?</p>
+                <p class="animated-text">Or just craving some new fashion inspiration?</p>
+                <p class="animated-text">
+                    Look no further! With GLAM GUIDE, you'll get personalized outfit recommendations, trendy suggestions, and a shopping experience that's just a click away.
+                </p>
+                <p class="animated-text">Get ready to slay every occasion with outfits tailored just for YOU!</p>
+                <br>
+                <p class="hop-text" style="animation-delay: 4s;">Let's get stylish!</p> <!-- The hopping text now appears after all others -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 GLAM GUIDE - All rights reserved</p>
+    </footer>
+    <script src="api.js"></script>
+    <script>
+        // Redirect to services after 8 seconds (allowing animations to complete)
+        setTimeout(() => {
+            window.location.href = 'services.html';
+        }, 8000);
+    </script>
+</body>
+</html>

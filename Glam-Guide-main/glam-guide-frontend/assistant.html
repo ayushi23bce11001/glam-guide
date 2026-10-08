@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Guide Outfit Recommender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .recommendations {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eef9f3;
+            border: 1px solid #cce5d6;
+            border-radius: 5px;
+        }
+        .recommendations h3 {
+            margin: 0;
+        }
+        .recommendations ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .recommendations ul li {
+            margin: 5px 0;
+            padding: 8px;
+            background: #dff0d8;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Glam Guide Outfit Recommender</h1>
+        <form id="recommendation-form">
+            <label for="body_type">Enter your body type (e.g., slim, athletic, curvy):</label>
+            <input type="text" id="body_type" name="body_type" required>
+
+            <label for="style">Enter your preferred style (e.g., casual, formal, sporty):</label>
+            <input type="text" id="style" name="style" required>
+
+            <label for="user_id">Enter your user ID (1-4):</label>
+            <input type="number" id="user_id" name="user_id" min="1" max="4" required>
+
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        <div class="recommendations" id="recommendations" style="display:none;">
+            <h3>Recommended Items:</h3>
+            <ul id="content-based-list"></ul>
+            <h3>Collaborative Filtering Recommendations:</h3>
+            <ul id="collaborative-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        // Redirect legacy assistant to the production AI Outfit Recommendation page
+        window.location.replace('outfitrecommendtion.html');
+    </script>
+</body>
+</html>

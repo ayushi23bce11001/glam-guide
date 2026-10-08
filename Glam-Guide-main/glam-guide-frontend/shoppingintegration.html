@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+        }
+        .product-card .btn {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 16px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .product-card .btn.amazon {
+            background-color: #FF9900;
+        }
+        .product-card .btn.flipkart {
+            background-color: #2874F0;
+        }
+        .product-card .btn:hover {
+            opacity: 0.9;
+        }
+        .back-icon {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px 8px 12px;
+            background: rgba(44, 48, 60, 0.92);
+            color: #fff;
+            border-radius: 999px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            font-weight: 500;
+            font-size: 1.08rem;
+            z-index: 1000;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            border: 1.5px solid #5e72eb;
+        }
+        .back-icon:hover {
+            background: #5e72eb;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(31, 38, 135, 0.18);
+        }
+        .back-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+        .back-icon span {
+            font-family: inherit;
+            font-size: 1.08rem;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="services.html" class="back-icon" title="Back to Services">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      <span>Back</span>
+    </a>
+    <header>
+        <h1>Seamless Shopping Integration</h1>
+        <p>Browse your favorite products and shop directly from Amazon or Flipkart!</p>
+    </header>
+    <div class="product-container" id="product-container"></div>
+
+    <script>
+        // Product Data
+        const products = [
+            {
+                name: "Classic Black Dress",
+                description: "A timeless black dress perfect for any occasion.",
+                image: "2934724f860a09a88e6a3ba270f41345.jpg",
+                amazonLink: "https://www.amazon.com/s?k=Classic+black+dress&crid=186A9FMMW1IX3&sprefix=classic+black+dres%2Caps%2C582&ref=nb_sb_noss_2",
+                flipkartLink: "https://www.flipkart.com/search?q=Classic%20black%20dress&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Stylish Handbag",
+                description: "A chic handbag to complete your outfit.",
+                image: "5bbcebab9e785a975f59f743153d1296.jpg",
+                amazonLink: "https://www.amazon.com/s?k=stylish+handbags&crid=1O0PHP7V8VUZ8&sprefix=stylish+handbags%2Caps%2C583&ref=nb_sb_noss_1",
+                flipkartLink: "https://www.flipkart.com/search?q=stylish%20handbags&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Trench Coats",
+                description: "Elegant and comfortable Trench coats for any winter events.",
+                image: "Coat.jpeg.jpg",
+                amazonLink: "https://www.amazon.in/s?k=Trench+Coat+women&crid=1P67Z2VQAE27S&sprefix=trench+coat+women%2Caps%2C223&ref=nb_sb_noss_1",
+                flipkartLink: "https://www.flipkart.com/search?q=trench+coat&sid=clo%2Cupk%2C6zw%2Chkw&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_7_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_7_na_na_na&as-pos=1&as-type=RECENT&suggestionId=trench+coat%7CWomen%27s+Coats&requestId=2462dfc8-d594-4e15-b6a7-da683f85c36f&as-backfill=on"
+            },
+            {
+                name: "Watches",
+                description: "A stylish watch to enhance your casual look.",
+                image: "watches.png",
+                amazonLink: "https://www.amazon.com/s?k=casual+watches+for+both+men+and+women&crid=3J2QD1VH081W2&sprefix=casual+watches+for+both+men+and+wome%2Caps%2C334&ref=nb_sb_noss",
+                flipkartLink: "https://www.flipkart.com/search?q=casual%20watches&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Hoodies",
+                description: "Let us fight cold together.",
+                image: "Hoodies.jpg",
+                amazonLink: "https://www.amazon.in/s?k=Hoodies+women&crid=3IJ5OMG6XSOXJ&sprefix=hoodies+women%2Caps%2C210&ref=nb_sb_noss_1",
+                flipkartLink: "https://www.flipkart.com/search?q=hoodies+for+women&sid=clo%2Cqvw%2C64a%2Clzz&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_2_8_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_2_8_na_na_na&as-pos=2&as-type=RECENT&suggestionId=hoodies+for+women%7CWomen%27s+Sweatshirts&requestId=89ec4501-d69a-4f5a-a8db-6cd7664ddb3b&as-searchtext=Hoodies%20"
+            },
+            {
+                name: "Accessories",
+                description: "Elegant and comfortable.",
+                image: "Accessories.jpg",
+                amazonLink: "https://www.amazon.in/s?k=accessories+women+jewellery&crid=ZHW9M26Q7L0P&sprefix=Accesories+women%2Caps%2C231&ref=nb_sb_ss_ts-doa-p_1_16",
+                flipkartLink: "https://www.flipkart.com/search?q=accessories%20for%20women%20jewellery&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Heels",
+                description: "Formal, traditional or chic, you will find them all here.",
+                image: "heels.jpg",
+                amazonLink: "https://www.amazon.in/s?k=Mango+Heels&crid=20C6394HKX415&sprefix=mango+heel%2Caps%2C208&ref=nb_sb_noss_1",
+                flipkartLink: "https://www.flipkart.com/search?q=Heels&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Boots",
+                description: "Comfortable shoes for formal events",
+                image: "boots.jpg",
+                amazonLink: "https://www.amazon.in/s?k=Mango+Boots+women&crid=3RY98OFD2F1WE&sprefix=mango+boots+women%2Caps%2C256&ref=nb_sb_noss_1",
+                flipkartLink: "https://www.flipkart.com/search?q=boots+for+women&sid=osp%2Ciko%2Csx7&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_10_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_10_na_na_na&as-pos=1&as-type=RECENT&suggestionId=boots+for+women%7CWomen%27s+Casual+Shoes&requestId=fac1437b-1987-476d-bcb5-5fc1d477f372&as-searchtext=boots%20for%20"
+            },
+            {
+                name: "t-shirts",
+                description: "Stylish for all casual occasions.",
+                image: "Tshirt.jpeg.jpg",
+                amazonLink: "https://www.amazon.in/s?k=T-shirts+women&crid=3GTSBAPE3QGGR&sprefix=t-shirts+women%2Caps%2C228&ref=nb_sb_noss_1",
+                flipkartLink: "https://www.flipkart.com/search?q=Tshirts%20women&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Blouses/tops",
+                description: "Elegant and comfortable shoes for formal as well as casual events.",
+                image: "tops.jpg",
+                amazonLink: "https://www.amazon.in/s?k=Blouses+formal&crid=15CBO9TG1G3RD&sprefix=blouses+formal%2Caps%2C210&ref=nb_sb_noss_1",
+                flipkartLink: "https://www.flipkart.com/search?q=formal%20shirts%20women&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Skirts",
+                description: "Let's rock the skirts!!",
+                image: "Skirts.jpg",
+                amazonLink: "https://www.amazon.in/s?k=Skirts&crid=348NBKNH2IB7M&sprefix=skirts%2Caps%2C227&ref=nb_sb_noss_2",
+                flipkartLink: "https://www.flipkart.com/search?q=skirts%20women&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+            {
+                name: "Dresses",
+                description: "Dresses are always in style.",
+                image: "Dresses.jpg",
+                amazonLink: "https://www.amazon.in/s?k=Dresses&crid=V8V35I2BWN5U&sprefix=dresses%2Caps%2C216&ref=nb_sb_noss_2",
+                flipkartLink: "https://www.flipkart.com/search?q=dresses%20women&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+            },
+        ];
+
+        // Load Products into the Page
+        const productContainer = document.getElementById('product-container');
+
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <a href="${product.amazonLink}" class="btn amazon" target="_blank">Buy on Amazon</a>
+                <a href="${product.flipkartLink}" class="btn flipkart" target="_blank">Buy on Flipkart</a>
+            `;
+            productContainer.appendChild(productCard);
+        });
+    </script>
+    <script src="api.js"></script>
+</body>
+</html>

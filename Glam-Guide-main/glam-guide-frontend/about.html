@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About GLAM GUIDE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0c0808;
+            padding: 20px;
+            color: #ffffff; 
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background-color: #000000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0c0c0c;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            animation: slideIn 2s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 12px;
+            transition: background-color 0.3s, color 0.3s;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #000000;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+
+        .about {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: black;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #444;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end);
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            color: #dddddd;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        footer {
+            background-color: #f9f6f6;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Hamburger menu styles */
+        .nav-menu {
+          position: fixed;
+          top: 18px;
+          left: 18px;
+          z-index: 2000;
+        }
+        .hamburger {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background: #333;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          align-items: center;
+          gap: 5px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+        .hamburger span {
+          display: block;
+          width: 24px;
+          height: 3px;
+          background: #fff;
+          border-radius: 2px;
+          transition: all 0.3s;
+        }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 48px;
+          left: 0;
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 4px 16px rgba(44,48,60,0.12);
+          min-width: 140px;
+          padding: 10px 0;
+        }
+        .nav-links a {
+          color: #333;
+          text-decoration: none;
+          padding: 12px 24px;
+          font-size: 1.08rem;
+          font-weight: 500;
+          transition: background 0.2s;
+        }
+        .nav-links a:hover {
+          background: #f4f6f9;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        @media (max-width: 700px) {
+          header {
+            padding: 12px 4px;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          header h1 {
+            font-size: 1.5rem;
+          }
+          .about {
+            padding: 10px;
+            margin: 18px auto;
+          }
+          .about h2 {
+            font-size: 1.3rem;
+          }
+          .about p {
+            font-size: 1rem;
+          }
+        }
+        @media (max-width: 400px) {
+          .nav-links a {
+            font-size: 0.98rem;
+            padding: 10px 12px;
+          }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hamburger Menu -->
+    <nav class="nav-menu">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="home.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About Us</a>
+      </div>
+    </nav>
+
+    <header>
+        <h1>GLAM GUIDE</h1>
+    </header>
+
+    <section class="about">
+        <h2>About GLAM GUIDE</h2>
+        <p>GLAM GUIDE is dedicated to empowering individuals to express their unique style through personalized fashion solutions. Our mission is to provide curated outfit recommendations tailored to your preferences, body type, and the latest fashion trends.</p>
+        <p>At GLAM GUIDE, we understand that fashion is not just about clothing; it's about confidence and self-expression. Our team of fashion experts and technology enthusiasts work together to ensure that you receive the best possible outfit suggestions.</p>
+        <p>We leverage advanced technology and data analytics to offer a seamless shopping experience, making it easy for you to discover and purchase the latest trends and timeless pieces.</p>
+        <p>Join us on this journey to redefine your wardrobe and elevate your style. Let GLAM GUIDE be your trusted partner in fashion.</p>
+    </section>
+
+    <footer>
+        <p>© 2024 GLAM GUIDE - All rights reserved</p>
+    </footer>
+    <script src="api.js"></script>
+    <script src="about.js" defer></script>
+    <script>
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburgerBtn.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+    // Optional: close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('open');
+      }
+    });
+    </script>
+</body>
+</html>

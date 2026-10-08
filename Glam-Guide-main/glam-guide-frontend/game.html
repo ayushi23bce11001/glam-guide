@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Quest - Glam Guide</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f9c7d4, #ffe3e3);
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            width: 100%;
+            background-color: #f06aa3;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #f06aa3;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .story {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Choices */
+        .choices {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .choices button {
+            background-color: #f09ecb;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .choices button:hover {
+            background-color: #e37aa8;
+            transform: translateY(-3px);
+        }
+
+        /* Score Display */
+        #score {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #f06aa3;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .story {
+                font-size: 1.2rem;
+            }
+
+            .choices button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+        .back-icon {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px 8px 12px;
+            background: rgba(44, 48, 60, 0.92);
+            color: #fff;
+            border-radius: 999px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            font-weight: 500;
+            font-size: 1.08rem;
+            z-index: 1000;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            border: 1.5px solid #5e72eb;
+        }
+        .back-icon:hover {
+            background: #5e72eb;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(31, 38, 135, 0.18);
+        }
+        .back-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+        .back-icon span {
+            font-family: inherit;
+            font-size: 1.08rem;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="services.html" class="back-icon" title="Back to Services">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      <span>Back</span>
+    </a>
+    <div class="container">
+        <h1>Fashion Quest: Style Chronicles</h1>
+        <p class="story" id="story">Welcome to the Fashion Quest! You are a budding stylist tasked with dressing a celebrity for a grand event. What’s your first move?</p>
+        <div class="choices" id="choices">
+            <!-- Choices will be dynamically added here -->
+        </div>
+        <p id="score">Score: 0</p>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const storyElement = document.getElementById('story');
+            const choicesElement = document.getElementById('choices');
+            const scoreElement = document.getElementById('score');
+
+            let score = 0;
+
+            // Story nodes
+            const storyNodes = {
+                start: {
+                    text: "Welcome to the Fashion Quest! You are a budding stylist tasked with dressing a celebrity for a grand event. What’s your first move?",
+                    choices: [
+                        { text: "Research current fashion trends", nextNode: "research" },
+                        { text: "Visit a local designer for inspiration", nextNode: "designer" }
+                    ]
+                },
+                research: {
+                    text: "You found that 'sustainable fashion' is trending. What outfit do you suggest?",
+                    choices: [
+                        { text: "A bold futuristic jumpsuit", nextNode: "wrong1" },
+                        { text: "An eco-friendly gown made from recycled fabric", nextNode: "correct1" }
+                    ]
+                },
+                designer: {
+                    text: "The designer offers you two outfits: a classic tuxedo and a colorful avant-garde dress. What do you pick?",
+                    choices: [
+                        { text: "Classic tuxedo", nextNode: "correct1" },
+                        { text: "Colorful avant-garde dress", nextNode: "wrong1" }
+                    ]
+                },
+                correct1: {
+                    text: "Great choice! The outfit is a hit at the event. What’s your next step?",
+                    choices: [
+                        { text: "Post about the look on social media", nextNode: "socialMedia" },
+                        { text: "Network with fashion photographers", nextNode: "network" }
+                    ]
+                },
+                wrong1: {
+                    text: "Oh no! The outfit was too bold for the occasion. You can try again.",
+                    choices: [
+                        { text: "Restart", nextNode: "start" }
+                    ]
+                },
+                socialMedia: {
+                    text: "Your post goes viral, gaining thousands of likes! You’re invited to a fashion show. What’s your move?",
+                    choices: [
+                        { text: "Attend the show", nextNode: "fashionShow" },
+                        { text: "Focus on designing your own collection", nextNode: "designCollection" }
+                    ]
+                },
+                network: {
+                    text: "The photographers loved your work and offer to collaborate. What's your next step?",
+                    choices: [
+                        { text: "Take the opportunity", nextNode: "fashionShow" },
+                        { text: "Decline and start designing your own collection", nextNode: "designCollection" }
+                    ]
+                },
+                fashionShow: {
+                    text: "At the fashion show, you meet industry icons and your career skyrockets. Congratulations, you’ve won the game!",
+                    choices: [
+                        { text: "Part -2", nextNode: "correct2" }
+                    ]
+                },
+            
+                // New story nodes added
+                correct2: {
+                    text: "The eco-friendly gown is a success. You’re invited to another high-profile event. What’s your next move?",
+                    choices: [
+                        { text: "Design a custom piece for the event", nextNode: "customDesign" },
+                        { text: "Buy an outfit from a famous brand", nextNode: "famousBrand" }
+                    ]
+                },
+                customDesign: {
+                    text: "Your custom design is admired by the fashion elite. What do you do next?",
+                    choices: [
+                        { text: "Open your own boutique", nextNode: "boutique" },
+                        { text: "Expand into digital fashion", nextNode: "digitalFashion" }
+                    ]
+                },
+                famousBrand: {
+                    text: "The famous brand’s outfit steals the spotlight, but you don’t get full credit. What’s your next move?",
+                    choices: [
+                        { text: "Work with more brands", nextNode: "moreBrands" },
+                        { text: "Create your own brand", nextNode: "createBrand" }
+                    ]
+                },
+                boutique: {
+                    text: "Your boutique gains a cult following. How do you expand?",
+                    choices: [
+                        { text: "Host fashion shows", nextNode: "fashionShow2" },
+                        { text: "Collaborate with influencers", nextNode: "influencerCollab" }
+                    ]
+                },
+                digitalFashion: {
+                    text: "Your digital fashion line is a hit in virtual reality. What’s your next move?",
+                    choices: [
+                        { text: "Create limited edition virtual outfits", nextNode: "virtualOutfits" },
+                        { text: "Expand to NFT fashion", nextNode: "nftFashion" }
+                    ]
+                },
+                designCollection: {
+                    text: "Your fashion line is a hit and gets featured in Vogue. Congratulations, you’ve won the game!",
+                    choices: [
+                        { text: "Part-3", nextNode: "moreBrands" }
+                    ]
+                },
+                moreBrands: {
+                    text: "You expand your portfolio by working with more brands. What’s your next move?",
+                    choices: [
+                        { text: "Collaborate with influencers", nextNode: "influencerCollab" },
+                        { text: "Launch a new fashion line", nextNode: "launchLine" }
+                    ]
+                },
+                createBrand: {
+                    text: "You start your own brand, and it becomes a sensation in the industry. How do you expand?",
+                    choices: [
+                        { text: "Start an international campaign", nextNode: "internationalCampaign" },
+                        { text: "Partner with top designers", nextNode: "designerPartnership" }
+                    ]
+                },
+                fashionShow2: {
+                    text: "Your fashion shows attract top-tier clientele. You’re now a household name in fashion!",
+                    choices: [
+                        { text: "Collaborate with global brands", nextNode: "globalCollab" },
+                        { text: "Open more boutiques worldwide", nextNode: "globalBoutiques" }
+                    ]
+                },
+                influencerCollab: {
+                    text: "Your collaborations with influencers take your brand to the next level. You’re featured on the cover of major magazines!",
+                    choices: [
+                        { text: "Launch a TV fashion series", nextNode: "tvSeries" },
+                        { text: "Write a fashion book", nextNode: "fashionBook" }
+                    ]
+                },
+                virtualOutfits: {
+                    text: "Your limited edition virtual outfits are in high demand in virtual worlds. What’s next?",
+                    choices: [
+                        { text: "Host virtual fashion shows", nextNode: "virtualFashionShow" },
+                        { text: "Create a virtual clothing line for avatars", nextNode: "avatarFashion" }
+                    ]
+                },
+                nftFashion: {
+                    text: "Your NFT fashion line is a huge success in the metaverse. What’s your next move?",
+                    choices: [
+                        { text: "Launch a digital fashion marketplace", nextNode: "digitalMarketplace" },
+                        { text: "Create exclusive digital fashion experiences", nextNode: "exclusiveDigital" }
+                    ]
+                },
+                launchLine: {
+                    text: "Your new fashion line is taking over the market. You’re now a leading fashion mogul. What’s your next move?",
+                    choices: [
+                        { text: "Expand internationally", nextNode: "internationalExpansion" },
+                        { text: "Collaborate with luxury brands", nextNode: "luxuryCollaboration" }
+                    ]
+                },
+                internationalCampaign: {
+                    text: "Your international campaign takes your brand global. You’re now recognized worldwide!",
+                    choices: [
+                        { text: "Collaborate with celebrities", nextNode: "celebrityCollab" },
+                        { text: "Launch a luxury collection", nextNode: "luxuryCollection" }
+                    ]
+                },
+                designerPartnership: {
+                    text: "Partnering with top designers, your brand is now seen as the epitome of high fashion.",
+                    choices: [
+                        { text: "Host private fashion shows for VIPs", nextNode: "globalCollab" },
+                        { text: "Open pop-up shops in major cities", nextNode: "globalBoutiques" }
+                    ]
+                },
+                globalCollab: {
+                    text: "Your global brand collaborations open doors to even bigger opportunities.",
+                    choices: [
+                        { text: "Launch a sustainable fashion line", nextNode: "globalBoutiques" },
+                        { text: "Create a global fashion event", nextNode: "tvSeries" }
+                    ]
+                },
+                globalBoutiques: {
+                    text: "Your boutiques are now a global phenomenon. You’re a true fashion icon.",
+                    choices: [
+                        { text: "Design a global capsule collection", nextNode: "virtualFashionShow" },
+                        { text: "Host a global fashion week", nextNode: "fashionBook" }
+                    ]
+                },
+                tvSeries: {
+                    text: "Your TV fashion series becomes a hit, and you are now a household name!",
+                    choices: [
+                        { text: "Create a fashion reality show", nextNode: "grandEnding" },
+                        { text: "Start a mentorship program for aspiring designers", nextNode: "grandEnding" }
+                    ]
+                },
+                fashionBook: {
+                    text: "Your fashion book becomes a bestseller. You’re now an authority in the industry.",
+                    choices: [
+                        { text: "Start a fashion podcast", nextNode: "grandEnding" },
+                        { text: "Launch a fashion magazine", nextNode:"grandEnding" }
+                    ]
+                },
+                virtualFashionShow: {
+                    text: "Your virtual fashion shows attract millions of viewers worldwide.",
+                    choices: [
+                        { text: "Host fashion shows with celebrities", nextNode: "grandEnding" },
+                        { text: "Host a charity fashion show", nextNode: "grandEnding" }
+                    ]
+                },
+                avatarFashion: {
+                    text: "Your avatar fashion line becomes the go-to style for virtual worlds.",
+                    choices: [
+                        { text: "Create collaborations with other virtual designers", nextNode: "grandEnding" },
+                        { text: "Expand your avatar fashion into NFTs", nextNode: "grandEnding" }
+                    ]
+                },
+                digitalMarketplace: {
+                    text: "Your digital marketplace is now the leading platform for digital fashion.",
+                    choices: [
+                        { text: "Collaborate with virtual worlds", nextNode: "grandEnding" },
+                        { text: "Launch exclusive designer drops", nextNode: "grandEnding" }
+                    ]
+                },
+                exclusiveDigital: {
+                    text: "You’ve created exclusive digital fashion experiences, becoming a trailblazer in the digital space.",
+                    choices: [
+                        { text: "Host a virtual fashion awards show", nextNode: "grandEnding" },
+                        { text: "Design custom digital outfits for celebrities", nextNode: "grandEnding" }
+                    ]
+                },
+                internationalExpansion: {
+                    text: "Your fashion empire expands internationally, and you’re now a top designer in major fashion capitals.",
+                    choices: [
+                        { text: "Start your own fashion school", nextNode: "grandEnding" },
+                        { text: "Host a global fashion tour", nextNode: "grandEnding" }
+                    ]
+                },
+                luxuryCollaboration: {
+                    text: "Collaborating with luxury brands, your designs are now seen on the world’s elite.",
+                    choices: [
+                        { text: "Create an exclusive line for high-end stores", nextNode: "grandEnding" },
+                        { text: "Start a luxury fashion line", nextNode: "grandEnding" }
+                    ]
+                },
+                celebrityCollab: {
+                    text: "Your collaborations with celebrities open doors to massive opportunities in the fashion industry.",
+                    choices: [
+                        { text: "Launch a fashion documentary", nextNode: "grandEnding" },
+                        { text: "Start your own fashion brand with celebrities", nextNode: "grandEnding" }
+                    ]
+                },
+                luxuryCollection: {
+                    text: "Your luxury collection becomes the talk of the fashion world. You're now a top designer!",
+                    choices: [
+                        { text: "Expand into haute couture", nextNode: "grandEnding" },
+                        { text: "Create a signature perfume", nextNode: "grandEnding" }
+                    ]
+                },
+            
+                // Additional branches for each path follow, allowing the user to reach new heights in the fashion world.
+                    // Additional story nodes to continue the journey
+                    hauteCouture: {
+                        text: "Your haute couture collection takes the world by storm. You're now the most sought-after designer in the industry.",
+                        choices: [
+                            { text: "Open a fashion museum to showcase your work", nextNode: "grandEnding" },
+                            { text: "Collaborate with top-tier fashion houses", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionPerfume: {
+                        text: "Your signature perfume becomes an instant hit, selling out globally. You're not just a designer anymore, you're a brand.",
+                        choices: [
+                            { text: "Create a lifestyle brand around your fashion", nextNode: "grandEnding" },
+                            { text: "Expand into cosmetics", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionMuseum: {
+                        text: "Your fashion museum becomes a cultural landmark, attracting thousands of visitors each year. You’ve solidified your legacy.",
+                        choices: [
+                            { text: "Start a global fashion education program", nextNode: "grandEnding" },
+                            { text: "Host an annual fashion gala", nextNode: "grandEnding" }
+                        ]
+                    },
+                    topTierCollab: {
+                        text: "Your collaborations with top fashion houses elevate your brand to an unparalleled level of prestige. Your designs are in every major fashion magazine.",
+                        choices: [
+                            { text: "Design for the royal family", nextNode: "grandEnding" },
+                            { text: "Create a multi-billion dollar fashion conglomerate", nextNode: "grandEnding" }
+                        ]
+                    },
+                    lifestyleBrand: {
+                        text: "Your lifestyle brand encompasses fashion, home decor, and more. You're not just a designer; you're an icon.",
+                        choices: [
+                            { text: "Start a fashion-themed luxury hotel", nextNode: "grandEnding" },
+                            { text: "Launch a global fashion reality TV series", nextNode: "grandEnding" }
+                        ]
+                    },
+                    cosmeticsLine: {
+                        text: "Your cosmetics line becomes a major player in the beauty industry. Your name is now synonymous with both fashion and beauty.",
+                        choices: [
+                            { text: "Partner with a major beauty influencer", nextNode: "grandEnding" },
+                            { text: "Launch a skincare collection", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionEducation: {
+                        text: "Your global fashion education program helps train the next generation of designers. Your impact on the industry is undeniable.",
+                        choices: [
+                            { text: "Start a global fashion scholarship fund", nextNode: "grandEnding" },
+                            { text: "Write a comprehensive fashion textbook", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionGala: {
+                        text: "Your annual fashion gala has become the most exclusive event in the fashion world. Celebrities and influencers alike clamor to attend.",
+                        choices: [
+                            { text: "Host a charity auction with your designs", nextNode: "grandEnding" },
+                            { text: "Launch a fashion-forward sustainability campaign", nextNode: "grandEnding" }
+                        ]
+                    },
+                    royalDesigns: {
+                        text: "Designing for the royal family takes your career to new heights. Your designs are now recognized as the epitome of luxury and elegance.",
+                        choices: [
+                            { text: "Design a royal wedding dress", nextNode: "grandEnding" },
+                            { text: "Create a royal fashion line", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionConglomerate: {
+                        text: "You've built a fashion empire, controlling multiple luxury brands. You're now a mogul with untold influence in the fashion world.",
+                        choices: [
+                            { text: "Expand into tech-driven fashion", nextNode: "grandEnding" },
+                            { text: "Start a philanthropic foundation", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionHotel: {
+                        text: "Your fashion-themed luxury hotel attracts global attention. Your personal brand is now a lifestyle, and your influence extends beyond fashion.",
+                        choices: [
+                            { text: "Launch a fashion-inspired real estate development", nextNode: "grandEnding" },
+                            { text: "Open a chain of fashion hotels worldwide", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionReality: {
+                        text: "Your global fashion reality TV series captivates millions. You're now a celebrity designer with a worldwide following.",
+                        choices: [
+                            { text: "Start a fashion production company", nextNode: "grandEnding" },
+                            { text: "Host an exclusive designer retreat", nextNode: "grandEnding" }
+                        ]
+                    },
+                    beautyInfluencerCollab: {
+                        text: "Your collaboration with beauty influencers takes your brand into new markets. You become a household name in both beauty and fashion.",
+                        choices: [
+                            { text: "Create a YouTube channel dedicated to fashion and beauty", nextNode: "grandEnding" },
+                            { text: "Launch a line of exclusive beauty tools", nextNode: "grandEnding" }
+                        ]
+                    },
+                    skincareLine: {
+                        text: "Your skincare line becomes the top choice for beauty enthusiasts around the world. You've successfully ventured into the beauty industry.",
+                        choices: [
+                            { text: "Start a beauty subscription box", nextNode: "grandEnding" },
+                            { text: "Launch a spa line with luxury skincare products", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionScholarship: {
+                        text: "Your fashion scholarship fund empowers aspiring designers, helping them achieve their dreams. You've become a beacon of inspiration for the next generation.",
+                        choices: [
+                            { text: "Create a global mentorship program", nextNode: "grandEnding" },
+                            { text: "Host a fashion competition for young talent", nextNode: "grandEnding" }
+                        ]
+                    },
+                    fashionTextbook: {
+                        text: "Your fashion textbook becomes a key resource for students around the world, solidifying your legacy as a fashion educator.",
+                        choices: [
+                            { text: "Start a fashion academy in multiple countries", nextNode: "grandEnding" },
+                            { text: "Create an online fashion course", nextNode: "grandEnding" }
+                        ]
+                    },
+                    charityAuction: {
+                        text: "Your charity auction raises millions, positioning you as a philanthropist in addition to being a top designer.",
+                        choices: [
+                            { text: "Establish a fashion-focused charity", nextNode: "grandEnding" },
+                            { text: "Create a sustainable fashion fund", nextNode: "grandEnding" }
+                        ]
+                    },
+                    sustainabilityCampaign: {
+                        text: "Your sustainability campaign reshapes the fashion industry, setting new standards for eco-friendly designs.",
+                        choices: [
+                            { text: "Start a fashion sustainability conference", nextNode: "grandEnding" },
+                            { text: "Collaborate with top brands for a green fashion line", nextNode: "grandEnding" }
+                        ]
+                    }, 
+                    grandEnding: {
+                        text: "After years of hard work, creativity, and innovation, you have reshaped the fashion industry. Your empire spans fashion, beauty, technology, and even philanthropy. You've created a lasting legacy as one of the most influential figures in the world of style. Your journey continues, inspiring millions to follow in your footsteps. Congratulations, you’ve completed your Fashion Quest!",
+                        choices: [
+                            { text: "Start a new chapter in the Fashion Quest", nextNode: "start" }
+                        ]
+                    },
+                
+                };
+
+            // Render story node
+            function renderNode(node) {
+                const currentNode = storyNodes[node];
+                storyElement.textContent = currentNode.text;
+                choicesElement.innerHTML = '';
+
+                currentNode.choices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.textContent = choice.text;
+                    button.addEventListener('click', () => {
+                        if (choice.nextNode === "correct1" || choice.nextNode === "correct2") score += 10;
+                        if (choice.nextNode === "wrong1") score -= 5;
+                        scoreElement.textContent = `Score: ${score}`;
+                        renderNode(choice.nextNode);
+                    });
+                    choicesElement.appendChild(button);
+                });
+            }
+
+            // Start game
+            renderNode('start');
+        });
+    </script>
+    <script src="api.js"></script>
+</body>
+</html>

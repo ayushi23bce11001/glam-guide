@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Guide - Outfit Recommendations</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4efef;
+            color: #444;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0a0a0a;
+            margin-top: 50px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #0c0c0c;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d62839;
+        }
+
+        #outfit-results {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        #outfit-results h2 {
+            font-size: 1.8rem;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .outfit {
+            background-color: #f8f0f2;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: calc(33% - 20px);
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .outfit img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .outfit {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .outfit {
+                width: 100%;
+            }
+        }
+        .back-icon {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px 8px 12px;
+            background: rgba(44, 48, 60, 0.92);
+            color: #fff;
+            border-radius: 999px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            font-weight: 500;
+            font-size: 1.08rem;
+            z-index: 1000;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            border: 1.5px solid #5e72eb;
+        }
+        .back-icon:hover {
+            background: #5e72eb;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(31, 38, 135, 0.18);
+        }
+        .back-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+        .back-icon span {
+            font-family: inherit;
+            font-size: 1.08rem;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="services.html" class="back-icon" title="Back to Services">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      <span>Back</span>
+    </a>
+    <div class="container">
+        <h1>Glam Guide Recommendations</h1>
+
+        <form id="outfit-form">
+            <label for="body-type">Select Your Body Type:</label>
+            <select id="body-type" name="body-type">
+                <option value="all">All Body Types</option>
+                <option value="apple">Apple</option>
+                <option value="pear">Pear</option>
+                <option value="hourglass">Hourglass</option>
+                <option value="rectangle">Rectangle</option>
+            </select>
+
+            <label for="style-preference">Select Your Preferred Style:</label>
+            <select id="style-preference" name="style-preference">
+                <option value="all">All Styles</option>
+                <option value="casual">Casual</option>
+                <option value="formal">Formal</option>
+                <option value="sporty">Sporty</option>
+                <option value="boho">Boho</option>
+                <option value="chic">Chic</option>
+            </select>
+
+            <label for="occasion">Occasion:</label>
+            <select id="occasion" name="occasion">
+                <option value="all">All Occasions</option>
+                <option value="work">Work</option>
+                <option value="party">Party</option>
+                <option value="wedding">Wedding</option>
+                <option value="casual">Casual</option>
+            </select>
+
+            <button type="submit">Find My Look</button>
+        </form>
+
+        <div id="outfit-results">
+            <!-- Recommended outfits will appear here -->
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="outfitrecommendation.js" defer></script>
+</body>
+</html>

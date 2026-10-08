@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - GLAM GUIDE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header {
+            background-color: #111010;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: #ffffffcd;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fbf8f8;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #ffcc00;
+            background-color: rgba(255, 204, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .contact-section {
+            max-width: 900px; /* Increase max-width to make it wider */
+            width: 50%; /* Set the width to 50% of the screen */
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #111;
+            margin-bottom: 15px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form label {
+            font-size: 1rem;
+            color: #111;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .contact-form input[type="submit"] {
+            background-color: #ffcc00;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background-color: #e6b800;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .contact-info div {
+            flex: 1;
+            margin-right: 15px;
+        }
+
+        .contact-info div:last-child {
+            margin-right: 0;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GLAM GUIDE</h1>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="about.html">About us</a>
+        </nav>
+    </header>
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <form class="contact-form">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your Full Name">
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="Your Email Address">
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Your Message..."></textarea>
+
+            <input type="submit" value="Send Message">
+        </form>
+
+        <div class="contact-info">
+            <div>
+                <h3>Made by:</h3>
+                <p>Students of VIT Bhopal</p>
+            </div>
+            <div>
+                <h3>Contact Details</h3>
+                <p>Email: <a href="mailto:glamguide@gmail.com">contact@glamguide.com</a></p>
+                <p>Phone: +123 456 7890</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 GLAM GUIDE - All rights reserved</p>
+    </footer>
+    <script src="api.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>

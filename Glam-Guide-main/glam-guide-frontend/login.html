@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Guide - Login</title>
+    <style>
+        /* Reset basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #fff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+
+        /* Login form container */
+        .login-container {
+            background-color: #fff;
+            margin: auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 2rem;
+        }
+
+        /* Input field styling */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 35px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Button styling */
+        .login-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #3e8e41;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Extra links (forgot password and signup) */
+        .login-container .extra-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .login-container a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Disclaimer styling */
+        .disclaimer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .disclaimer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .disclaimer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GLAM GUIDE</h1>
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="about.html">About us</a>
+        </nav>
+    </header>
+
+    <!-- Login Form Container -->
+    <div class="login-container">
+        <h2>Login to Glam Guide</h2>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <label for="password">Password</label>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <input type="checkbox" id="togglePassword"> Show Password
+            <button type="submit">Login</button>
+            
+            <div class="extra-links">
+                <a href="./forgot_password.html">Forgot Password?</a>
+                <a href="./signup.html">Sign Up</a>
+            </div>
+
+            <p class="disclaimer">By logging in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+        </form>
+    </div>
+
+    <footer>
+        <p>© 2024 GLAM GUIDE - All rights reserved</p>
+    </footer>
+    
+    <script src="api.js"></script>
+    <script src="login.js" defer></script>
+</body>
+</html>
